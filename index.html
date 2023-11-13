@@ -102,13 +102,6 @@
                 updateTasksPanel();
             }
 
-            function getInitialValueOfTasksIfNecessary(tasks) {
-                if (tasks == null) {
-                    tasks = [];
-                }
-                return tasks;
-            }
-
             function toogleCheck(id) {
                 let tasks = storage.readAll();;
 
