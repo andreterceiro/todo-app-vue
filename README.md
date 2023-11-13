@@ -14,4 +14,4 @@ In the future I will do these things.
 Another thing I also need to do is put the Javascript that is in a script tag in the
 index.html in an external file.
 
-[Demo of current the version](https://www.youtube.com/watch?v=GX7TeGuW3X0).
+[Demo of current the version](https://youtu.be/yaCapL30PRE).
