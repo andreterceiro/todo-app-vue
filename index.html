@@ -74,7 +74,6 @@
 
                     let check = '';
                     if (task.checked) {
-                        console.log("checked: "+ task.id)
                         check = " checked='checked' "
                     } 
 
@@ -102,6 +101,18 @@
                 updateTasksPanel();
             }
 
+            /**
+             * The checkbox works itself without a code, ok,
+             * but we need to save the value to be the same
+             * after a refresh
+             *
+             * @param {number} id ID to be saved. We do not
+             *                    need the new value because
+             *                    we always invert this value
+             *                    and we already know this value
+             *
+             * @returns {undefined}
+             */
             function toogleCheck(id) {
                 let tasks = storage.readAll();;
 
@@ -111,10 +122,7 @@
                     }
                 }
 
-                localStorage.setItem(
-                    "tasks", 
-                    JSON.stringify(tasks)
-                );
+                storage.saveAll(tasks);
             }
 
             // Loading all saved tasks on start
