@@ -1,0 +1,209 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    </head>
+    <style>
+        #left-column {
+            border-right: 1px solid #CCCCCC;
+        }
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+    <body>
+        <div class="container" id="vue-container">
+            <div class="row">
+                <div class="col-6" id="left-column">
+                    Task
+                    <input type="text" id="txtTask" name="txtTituloTarefa" />
+                    <button @click="register">Register</button>
+                </div>
+                <div class="col-6" id="right-column">
+                    
+                </div>
+            </div>
+        </div>
+        <script>
+            new Vue({
+                el: "#vue-container",
+                methods: {
+                    register: function() {
+                        const value = document.getElementById("txtTask").value;
+                        save(value);
+                        updateTasksPanel();
+                    }
+                }
+            })
+
+            /**
+             * Saves the task 
+             * 
+             * @param {string} taskString Value to be saved
+             * 
+             * @throws {Error} If the value to be saved is empty
+             * 
+             * @returns {undefined}
+             */ 
+            function save(taskString) {
+                if (taskString.trim() == "") {
+                    alert ("The text of the tesk cannot be empty");
+                    throw(Error("The text of the tesk cannot be empty"));
+                }
+
+                let tasks = JSON.parse(localStorage.getItem("tasks"));
+                
+                if (tasks == null) {
+                    tasks = [];
+                }
+
+                tasks.push(
+                    {
+                        "id": getNewId(),
+                        "name": taskString,
+                        "checked": false
+                    }
+                );
+                localStorage.setItem(
+                    "tasks", 
+                    JSON.stringify(tasks)
+                );
+            }
+
+            /**
+             * Updates the task panel
+             * 
+             * @param {string} value Value to be saved
+             * 
+             * @returns {undefined}
+             */ 
+            function updateTasksPanel() {
+                const rightColumn = document.getElementById("right-column");
+                rightColumn.innerHTML = "";
+                
+                const tasks = getTasks();
+
+                let cont = 0;
+                let cor = "#FFFFFF";
+
+                for (const task of tasks) {
+                    cont++;
+
+                    if (cont % 2 == 1) {
+                        cor = "#FFF";
+                    } else {
+                        cor = "#DDD";
+                    }
+
+                    let check = '';
+                    if (task.checked) {
+                        console.log("checked: "+ task.id)
+                        check = " checked='checked' "
+                    } 
+
+                    rightColumn.innerHTML = rightColumn.innerHTML
+                        + `<div style="background-color: ${cor}">`
+                        + `    <input type="checkbox" onclick="toogleCheck(${task.id})" value="${task.id}" ${check} abc />` 
+                        + `    ${task.name}`
+                        + `    <button onclick="deleteTask(${task.id});">Delete</button>`
+                        + "</div>";
+                   }
+            }
+
+            /**
+             * Return all tasks saved in the storage
+             * 
+             * @returns {object} an array of tasks
+             */
+            function getTasks() {
+                let tasks = JSON.parse(
+                    localStorage.getItem(
+                        'tasks'
+                    )
+                );
+
+                tasks = getInitialValueOfTasksIfNecessary(tasks);
+                return tasks;
+            }
+
+            /**
+             * Return all tasks saved in the storage
+             * 
+             * @throws {TypeError} If the format of the tasks 
+             *                     saved in the storage is invalid
+             *
+             * @returns {number} The desired ID
+             */ 
+            function getNewId() {
+                const tasks = getTasks();
+
+                if (tasks.length == 0) {
+                    return 1;
+                }
+
+                const lastTask = tasks[tasks.length - 1];
+
+                try {
+                    return lastTask.id + 1;
+                } catch (e) {
+                    throw new TypeError("Invalid format of tasks in the storage");
+                }
+            }
+
+            /**
+             * Deletes a task from the storage
+             * 
+             * @throws {Error} If an error occurs on delete a task
+             * 
+             * @returns {undefined}
+             */
+            function deleteTask(id) {
+                let tasks = getTasks();
+
+                let valuesToSave = [];
+                for (const i in tasks) {
+                    if (tasks[i].id != id) {
+                        valuesToSave.push(
+                            tasks[i]
+                        );
+                    }
+                }
+
+                localStorage.setItem(
+                    "tasks", 
+                    JSON.stringify(valuesToSave)
+                );
+                updateTasksPanel();
+            }
+
+            function getInitialValueOfTasksIfNecessary(tasks) {
+                if (tasks == null) {
+                    tasks = [];
+                }
+                return tasks;
+            }
+
+            function toogleCheck(id) {
+                let tasks = getTasks();
+
+                for (let i in tasks) {
+                    if (tasks[i].id == id) {
+                        tasks[i].checked = true;
+                    }
+                }
+
+                localStorage.setItem(
+                    "tasks", 
+                    JSON.stringify(tasks)
+                );
+            }
+
+            // Loading all saved tasks on start
+            document.addEventListener("DOMContentLoaded", function() {
+                updateTasksPanel();
+            });
+        </script>       
+    </body>
+
+</html>
