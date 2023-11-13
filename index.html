@@ -79,7 +79,7 @@
 
                     rightColumn.innerHTML = rightColumn.innerHTML
                         + `<div style="background-color: ${cor}">`
-                        + `    <input type="checkbox" onclick="toogleCheck(${task.id})" value="${task.id}" ${check} abc />` 
+                        + `    <input type="checkbox" onclick="toggleCheck(${task.id})" value="${task.id}" ${check} />`
                         + `    ${task.name}`
                         + `    <button onclick="deleteTask(${task.id});">Delete</button>`
                         + "</div>";
@@ -113,7 +113,7 @@
              *
              * @returns {undefined}
              */
-            function toogleCheck(id) {
+            function toggleCheck(id) {
                 let tasks = storage.readAll();;
 
                 for (let i in tasks) {
