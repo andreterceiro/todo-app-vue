@@ -12,6 +12,24 @@ class Storage {
     }
 
     /**
+     * Save all tasks
+     *
+     * @param {object} tasks Tasks to be saved
+     *
+     * @returns {undefined}
+     */
+    saveAll(tasks) {
+        if (typeof tasks != "object" || tasks == null) {
+            throw new TypeError("Tasks need to be an object not null")
+        }
+
+        localStorage.setItem(
+            this.storageName,
+            JSON.stringify(tasks)
+        );
+    }
+
+    /**
      * Saves the task
      *
      * @param {string} taskString Value to be saved
