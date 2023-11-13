@@ -12,18 +12,38 @@ class Storage {
     }
 
     /**
-     * Sets a new task in the storage
-     * 
-     * @param {object} task Task to be saved
+     * Saves the task
+     *
+     * @param {string} taskString Value to be saved
+     *
+     * @throws {Error} If the value to be saved is empty
      *
      * @returns {undefined}
      */
-    setNewTask(task) {
-        let tasks = this.readAll();
-        tasks.push(task)
+    saveNewTask(taskString) {
+        if (taskString.trim() == "") {
+            throw(Error("The text of the tesk cannot be empty"));
+        }
 
+        let tasks = JSON.parse(
+            localStorage.getItem(
+                this.storageName
+            )
+        );
+
+        if (tasks == null) {
+            tasks = [];
+        }
+
+        tasks.push(
+            {
+                "id": storage.getNewID(),
+                "name": taskString,
+                "checked": false
+            }
+        );
         localStorage.setItem(
-            this.storageName, 
+            "tasks",
             JSON.stringify(tasks)
         );
     }

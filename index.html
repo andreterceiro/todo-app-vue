@@ -37,7 +37,7 @@
                         const value = document.getElementById("txtTask").value;
 
                         try {
-                            save(value);
+                            storage.saveNewTask(value);
                         } catch (e) {
                             alert(e);
                         }
@@ -46,39 +46,6 @@
                     }
                 }
             })
-
-            /**
-             * Saves the task 
-             * 
-             * @param {string} taskString Value to be saved
-             * 
-             * @throws {Error} If the value to be saved is empty
-             * 
-             * @returns {undefined}
-             */ 
-            function save(taskString) {
-                if (taskString.trim() == "") {
-                    throw(Error("The text of the tesk cannot be empty"));
-                }
-
-                let tasks = JSON.parse(localStorage.getItem("tasks"));
-                
-                if (tasks == null) {
-                    tasks = [];
-                }
-
-                tasks.push(
-                    {
-                        "id": storage.getNewID(),
-                        "name": taskString,
-                        "checked": false
-                    }
-                );
-                localStorage.setItem(
-                    "tasks", 
-                    JSON.stringify(tasks)
-                );
-            }
 
             /**
              * Updates the task panel
