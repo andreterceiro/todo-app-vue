@@ -145,7 +145,7 @@ class Storage {
         }
 
         localStorage.setItem(
-            "tasks",
+            this.storageName,
             JSON.stringify(valuesToSave)
         );
     }
