@@ -86,7 +86,7 @@
                 const rightColumn = document.getElementById("right-column");
                 rightColumn.innerHTML = "";
                 
-                const tasks = getTasks();
+                const tasks = storage.readAll();
 
                 let cont = 0;
                 let cor = "#FFFFFF";
@@ -116,22 +116,6 @@
             }
 
             /**
-             * Return all tasks saved in the storage
-             * 
-             * @returns {object} an array of tasks
-             */
-            function getTasks() {
-                let tasks = JSON.parse(
-                    localStorage.getItem(
-                        'tasks'
-                    )
-                );
-
-                tasks = getInitialValueOfTasksIfNecessary(tasks);
-                return tasks;
-            }
-
-            /**
              * Deletes a task from the storage
              * 
              * @throws {Error} If an error occurs on delete a task
@@ -139,7 +123,7 @@
              * @returns {undefined}
              */
             function deleteTask(id) {
-                let tasks = getTasks();
+                let tasks = storage.readAll();
 
                 let valuesToSave = [];
                 for (const i in tasks) {
@@ -165,7 +149,7 @@
             }
 
             function toogleCheck(id) {
-                let tasks = getTasks();
+                let tasks = storage.readAll();;
 
                 for (let i in tasks) {
                     if (tasks[i].id == id) {
