@@ -14,9 +14,11 @@ class Storage {
     /**
      * Sets a new task in the storage
      * 
+     * @param {object} task Task to be saved
+     *
      * @returns {undefined}
      */
-    setNewTask() {
+    setNewTask(task) {
         let tasks = this.readAll();
         tasks.push(task)
 
