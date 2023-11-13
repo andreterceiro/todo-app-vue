@@ -38,6 +38,7 @@
 
                         try {
                             storage.saveNewTask(value);
+                            document.getElementById("txtTask").value = "";
                         } catch (e) {
                             alert(e);
                         }
