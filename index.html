@@ -7,6 +7,7 @@
     <style>
         #left-column {
             border-right: 1px solid #CCCCCC;
+            height: 300px;
         }
         .container {
             margin-top: 50px;
@@ -189,7 +190,7 @@
 
                 for (let i in tasks) {
                     if (tasks[i].id == id) {
-                        tasks[i].checked = true;
+                        tasks[i].checked = !tasks[i].checked;
                     }
                 }
 
