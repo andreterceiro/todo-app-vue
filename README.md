@@ -1,12 +1,12 @@
 # Todo App with VueJS
 
-Todo simple app with VueJS. One thing I still want to do is put the entire persistence part (saving and retrieving data) in an external file, so I can easily change the strategy. Today it is in index.html even using Local Storage.
+Todo simple app with VueJS.
 
 I will want to create several ways to save the data, such as:
 
 - in Local Storage itself, as it already is;
 - In a PHP API (I rent shared hosting on Locaweb and can save there) using MySQL as the database server;
-- In a Node.JS file using DynamoDB as the database server;
+- In a Node.JS file using DynamoDB as the database server and the code running in a Lambda (bacause I don't have to save the state in a session, only in an external database);
 - In a Rails API using (by my choice) SQLite as the database server.
 
 In the future I will do these things.
