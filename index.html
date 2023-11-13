@@ -35,7 +35,13 @@
                 methods: {
                     register: function() {
                         const value = document.getElementById("txtTask").value;
-                        save(value);
+
+                        try {
+                            save(value);
+                        } catch (e) {
+                            alert(e);
+                        }
+
                         updateTasksPanel();
                     }
                 }
@@ -52,7 +58,6 @@
              */ 
             function save(taskString) {
                 if (taskString.trim() == "") {
-                    alert ("The text of the tesk cannot be empty");
                     throw(Error("The text of the tesk cannot be empty"));
                 }
 
