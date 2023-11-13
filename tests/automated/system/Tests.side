@@ -1,0 +1,82 @@
+{
+  "id": "e7cc947f-006e-445f-9562-fff7a4f14fb4",
+  "version": "2.0",
+  "name": "Tests",
+  "url": "http://127.0.0.1:8081",
+  "tests": [{
+    "id": "f5ad1bc5-6b4e-4162-bb9b-88180e6a0b71",
+    "name": "Create",
+    "commands": [{
+      "id": "261ef2f9-7e65-4c60-900f-044a546d7e02",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fef31bbb-20ab-45fe-90da-2be1e7475064",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "550x691",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6c91a8c4-bafb-4aa9-b13f-6f46d38f7abb",
+      "comment": "",
+      "command": "click",
+      "target": "id=txtTask",
+      "targets": [
+        ["id=txtTask", "id"],
+        ["name=txtTituloTarefa", "name"],
+        ["css=#txtTask", "css:finder"],
+        ["xpath=//input[@id='txtTask']", "xpath:attributes"],
+        ["xpath=//div[@id='left-column']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9e5ca6be-436c-4f34-a36c-976063980864",
+      "comment": "",
+      "command": "type",
+      "target": "id=txtTask",
+      "targets": [
+        ["id=txtTask", "id"],
+        ["name=txtTituloTarefa", "name"],
+        ["css=#txtTask", "css:finder"],
+        ["xpath=//input[@id='txtTask']", "xpath:attributes"],
+        ["xpath=//div[@id='left-column']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "test"
+    }, {
+      "id": "29d9f093-4531-40f8-a701-a649ce625e19",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//div[@id='left-column']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Register')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6786065a-5b01-4a0a-9c24-5fabed9bd380",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=task-1",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "61082398-aecf-4877-b719-dd35a929ac4b",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["f5ad1bc5-6b4e-4162-bb9b-88180e6a0b71"]
+  }],
+  "urls": ["http://127.0.0.1:8081/"],
+  "plugins": []
+}
