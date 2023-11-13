@@ -88,28 +88,17 @@
             }
 
             /**
-             * Deletes a task from the storage
-             * 
-             * @throws {Error} If an error occurs on delete a task
+             * Deletes a task from the storage and updates the
+             * task panel
              * 
              * @returns {undefined}
              */
             function deleteTask(id) {
-                let tasks = storage.readAll();
-
-                let valuesToSave = [];
-                for (const i in tasks) {
-                    if (tasks[i].id != id) {
-                        valuesToSave.push(
-                            tasks[i]
-                        );
-                    }
+                try {
+                    storage.delete(id);
+                } catch (e) {
+                    alert(e.message);
                 }
-
-                localStorage.setItem(
-                    "tasks", 
-                    JSON.stringify(valuesToSave)
-                );
                 updateTasksPanel();
             }
 

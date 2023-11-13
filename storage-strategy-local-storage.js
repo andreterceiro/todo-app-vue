@@ -97,6 +97,42 @@ class Storage {
     }
 
     /**
+     * Deletes a task from the storage
+     *
+     * @throws {TypeError}  If the parameter ID does not be
+     *                      a number
+     * @throws {RangeError} If the a task with the passed ID
+     *                      cannot be found
+     *
+     * @param {number} id The ID of the task tp be deleted
+     */
+    delete(id) {
+        if (typeof id !== "number") {
+            throw new TypeError("ID needs to be an integer");
+        }
+
+        let tasks = storage.readAll();
+
+        let valuesToSave = [];
+        for (const i in tasks) {
+            if (tasks[i].id != id) {
+                valuesToSave.push(
+                    tasks[i]
+                );
+            }
+        }
+
+        if (valuesToSave.length == tasks.length) {
+            throw new RangeError("A task with this ID does not exists");
+        }
+
+        localStorage.setItem(
+            "tasks",
+            JSON.stringify(valuesToSave)
+        );
+    }
+
+    /**
      * Sets the storage name. It is not necessary to use if you
      * wanna use the default storage name "tasks", but you can
      * change it here
