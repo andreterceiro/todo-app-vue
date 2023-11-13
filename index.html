@@ -79,8 +79,8 @@
                     } 
 
                     rightColumn.innerHTML = rightColumn.innerHTML
-                        + `<div style="background-color: ${cor}">`
-                        + `    <input type="checkbox" onclick="toggleCheck(${task.id})" value="${task.id}" ${check} />`
+                        + `<div id="container-task-${task.id}" style="background-color: ${cor}">`
+                        + `    <input type="checkbox" onclick="toggleCheck(${task.id})" id="task-${task.id}" value="${task.id}" ${check} />`
                         + `    ${task.name}`
                         + `    <button onclick="deleteTask(${task.id});">Delete</button>`
                         + "</div>";
