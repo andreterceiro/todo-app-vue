@@ -13,30 +13,36 @@ class Storage {
         } else {
             this.server = 'http://127.0.0.1:8000'
         }
-
-        console.log(this.server);
     }
 
     /**
      * Save all tasks
      *
+     * @async
+     *
      * @param {object} tasks Tasks to be saved
      *
      * @returns {undefined}
      */
-    saveAll(tasks) {
+    async saveAll(tasks) {
         if (typeof tasks != "object" || tasks == null) {
             throw new TypeError("Tasks need to be an object not null")
         }
 
-        localStorage.setItem(
-            this.storageName,
-            JSON.stringify(tasks)
+        await fetch(
+            `${this.server}/tasks/saveAll/`,
+            {
+                method: "POST",
+                body: JSON.stringify(tasks),
+                headers: {"Content-type": "application/json; charset=UTF-8"}
+            }
         );
     }
 
     /**
      * Saves the task
+     *
+     * @async
      *
      * @param {string} taskString Value to be saved
      *
@@ -44,31 +50,14 @@ class Storage {
      *
      * @returns {undefined}
      */
-    saveNewTask(taskString) {
-        if (taskString.trim() == "") {
-            throw(Error("The text of the tesk cannot be empty"));
-        }
-
-        let tasks = JSON.parse(
-            localStorage.getItem(
-                this.storageName
-            )
-        );
-
-        if (tasks == null) {
-            tasks = [];
-        }
-
-        tasks.push(
+    async saveNewTask(taskString) {
+        await fetch(
+            `${this.server}/tasks/save/`,
             {
-                "id": storage.getNewID(),
-                "name": taskString,
-                "checked": false
+                method: "POST",
+                body: JSON.stringify({checked: false, name: taskString}),
+                headers: {"Content-type": "application/json; charset=UTF-8"}
             }
-        );
-        localStorage.setItem(
-            "tasks",
-            JSON.stringify(tasks)
         );
     }
 
@@ -80,21 +69,6 @@ class Storage {
     async get(id) {
         const response = await fetch(`${this.server}/tasks/get/${id}`);
         return response.json();
-    }
-
-    /**
-     * See the "id" of the last entry, increments one and 
-     * returns it
-     * 
-     * @returns {number} 
-     */
-    getNewID() {
-        const tasks = this.readAll();
-        if (tasks.length == 0) {
-            return 1;
-        }
-
-        return tasks[tasks.length - 1].id + 1;
     }
 
     /**
@@ -126,25 +100,5 @@ class Storage {
 
         const response = await fetch(`${this.server}/tasks/delete/${id}`);
         return response.json();
-    }
-
-    /**
-     * Sets the storage name. It is not necessary to use if you
-     * wanna use the default storage name "tasks", but you can
-     * change it here
-     * 
-     * @throws {TypeError} If the storage name passed as parameter
-     *                     is not a string
-     * 
-     * @param {string} storageName The desired new storage name
-     * 
-     * @returns {undefined}
-     */
-    setStorageName(storageName) {
-        if (typeof storageName != "string") {
-            throw new TypeError("storageName needs to be a string");
-        }
-
-        this.storageName = storageName;
     }
 }
