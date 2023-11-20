@@ -15,3 +15,12 @@ Another thing I also need to do is put the Javascript that is in a script tag in
 index.html in an external file.
 
 [Demo of current the version](https://youtu.be/yaCapL30PRE).
+
+[Demo in English](https://www.youtube.com/watch?v=zSuqlGYUY7Y).
+
+
+# Another parts
+
+[PHP API](https://github.com/andreterceiro/todoapp-php)
+
+[Client part](https://github.com/andreterceiro/todo-app-vue)
