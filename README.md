@@ -23,4 +23,4 @@ index.html in an external file.
 
 [PHP API](https://github.com/andreterceiro/todoapp-php)
 
-[Client part](https://github.com/andreterceiro/todo-app-vue)
+[Node.JS API](https://github.com/andreterceiro/todoapp-nodejs)
